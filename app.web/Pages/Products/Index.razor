@@ -1,0 +1,139 @@
+﻿@page "/"
+@using app.web.Dtos.Products
+@using app.web.Pages.Components
+@using app.web.Pages.Http
+@using app.web.Pages.Http.Products
+
+@inject IHttpManager HttpRepo
+
+<SliderComponent />
+<SearchBoxComponent SortByAscending="@sortByAscending"
+                    OnSortChanged="SortByPrice"
+                    SearchTerm="@searchTerm" OnSearchChanged="UpdateSearchTerm" />
+@if (isMainLoading)
+{
+    <PreloaderComponent/>
+}
+else if (filteredProducts == null || filteredProducts.Count == 0)
+{
+    <p class="text-center">Products not found.</p>
+}
+else
+{
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 mt-3">
+        @foreach (var item in filteredProducts)
+        {
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4">
+                <ProductCardComponent ImageUrl="@item.image_url"
+                                      Name="@item.name"
+                                      Description="@item.description"
+                                      Price="@item.price"
+                                      Currency="@item.currency"
+                                      ModalDataTarget="@item.modalDataTarget" />
+                <ProductDetailsComponent detailProduct=@item />
+            </div>
+        }
+    </div>
+    <PagingComponent pageIndex="pageIndex" totalPages="totalPages" OnPageChanged="OnPageChanged" />
+}
+@code {
+    bool isMainLoading = false;
+    List<ProductDto> products = new();
+    List<ProductDto> filteredProducts = new();
+    int pageIndex = 1;
+    int pageSize = 12;
+    int totalPages = 0;
+    string productImageUrl = string.Empty;
+    string searchTerm = string.Empty;
+    bool sortByAscending = true;
+
+    protected override async Task OnInitializedAsync()
+    {
+        // Initialize the component by loading products asynchronously
+        await LoadProductsAsync();
+    }
+
+    private async Task LoadProductsAsync()
+    {
+        // Set loading state to true
+        isMainLoading = true;
+
+        // Fetch products from the HTTP repository
+        var result = await HttpRepo.products.GetAllProducts();
+
+        if (result != null)
+        {
+            // Update products and calculate total pages
+            products = result;
+            totalPages = (int)Math.Ceiling(result.Count / (double)pageSize);
+
+            // Apply search filter to display the appropriate subset of products
+            ApplySearchFilter();
+
+            // Set loading state to false as the operation is complete
+            isMainLoading = false;
+        }
+    }
+
+    // this logic is temporary [belong to BE]
+    private void ApplySearchFilter()
+    {
+        // Check if search term is empty or null
+        if (string.IsNullOrWhiteSpace(searchTerm))
+        {
+            // If no search term, display the full list of products
+            filteredProducts = new List<ProductDto>(products.Skip((pageIndex - 1) * pageSize).Take(pageSize).ToList());
+        }
+        else
+        {
+            // If there is a search term, filter products based on name or description
+            filteredProducts = products
+                .Where(p => p.name.Contains(searchTerm, StringComparison.OrdinalIgnoreCase) ||
+                            p.description.Contains(searchTerm, StringComparison.OrdinalIgnoreCase))
+                .Skip((pageIndex - 1) * pageSize).Take(pageSize).ToList();
+        }
+    }
+
+    private async Task OnPageChanged(int newPageIndex)
+    {
+        // Check if there are products and totalPages are calculated
+        if (totalPages == 0 || products.Count == 0)
+            return;
+
+        // Validate the newPageIndex
+        if (newPageIndex < 1 || newPageIndex > totalPages)
+            return;
+
+        // Update pageIndex and reload products
+        pageIndex = newPageIndex;
+        await LoadProductsAsync();
+    }
+
+    private void SortByPrice()
+    {
+        // Toggle between ascending and descending order based on sortByAscending flag
+        products = sortByAscending
+            ? products.OrderBy(p => p.price).ToList()
+            : products.OrderByDescending(p => p.price).ToList();
+
+        // Toggle the sortByAscending flag
+        sortByAscending = !sortByAscending;
+
+        // Apply search filter to the sorted products
+        ApplySearchFilter();
+    }
+
+    private async Task OnSearchChanged()
+    {
+        // Reload products when the search term changes
+        await LoadProductsAsync();
+    }
+
+    private async Task UpdateSearchTerm(string newSearchTerm)
+    {
+        // Update the search term and trigger a reload of products
+        searchTerm = newSearchTerm;
+        await OnSearchChanged();
+    }
+
+}

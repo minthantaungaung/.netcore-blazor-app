@@ -1,0 +1,33 @@
+﻿@if (totalPages > 0)
+{
+    <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center">
+            <li class="page-item">
+                <button class="page-link" @onclick="@(() => OnPageChanged.InvokeAsync(pageIndex - 1))" disabled="@(pageIndex == 1)">
+                    Previous
+                </button>
+            </li>
+            @for (int i = 1; i <= totalPages; i++)
+            {
+                <li class="page-item">
+                    <a class="page-link @((i == pageIndex ? "text-info" : ""))" @onclick="@(() => OnPageChanged.InvokeAsync(i))">@i</a>
+                </li>
+            }
+            <li class="page-item">
+                <button class="page-link" @onclick="@(() => OnPageChanged.InvokeAsync(pageIndex + 1))" disabled="@(pageIndex == totalPages)">
+                    Next
+                </button>
+            </li>
+        </ul>
+    </nav>
+}
+@code {
+    [Parameter]
+    public int pageIndex { get; set; }
+
+    [Parameter]
+    public int totalPages { get; set; }
+
+    [Parameter]
+    public EventCallback<int> OnPageChanged { get; set; }
+}

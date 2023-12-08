@@ -1,0 +1,47 @@
+﻿<div class="row mt-3">
+    <div class="col-md-6 offset-md-3 d-flex">
+        <div class="input-group mb-3">
+            <input type="text" class="form-control" placeholder="Search products..." @bind="@SearchTerm" aria-label="Search products" aria-describedby="button-search">
+            <button class="btn btn-primary" type="button" @onclick="@(() => OnSearchChanged.InvokeAsync(SearchTerm))" id="button-search">Search</button>
+        </div>
+        <div class="col-auto">
+            <button class="btn btn-secondary" type="button" @onclick="@(() => OnSearchChanged.InvokeAsync(""))" id="button-all">CLEAR</button>
+        </div>
+        <div class="col-auto">
+            <button class="btn btn-outline-primary ms-2" @onclick="@SortByPrice">
+                Price &nbsp;
+                @if (SortByAscending)
+                {
+                    <span class="badge text-bg-primary">ASC</span>
+                }
+                else
+                {
+                    <span class="badge text-bg-primary">DESC</span>
+                }
+            </button>
+        </div>
+    </div>
+</div>
+@code {
+    [Parameter]
+    public string SearchTerm { get; set; }
+
+    [Parameter]
+    public EventCallback<string> OnSearchChanged { get; set; }
+
+    [Parameter]
+    public bool SortByAscending { get; set; }
+
+    [Parameter]
+    public EventCallback<bool> OnSortChanged { get; set; }
+
+    private void SortByPrice()
+    {
+        OnSortChanged.InvokeAsync(!SortByAscending);
+    }
+    private async Task OnSearchTermChanged(string newSearchTerm)
+    {
+        SearchTerm = newSearchTerm;
+        await OnSearchChanged.InvokeAsync(newSearchTerm);
+    }
+}

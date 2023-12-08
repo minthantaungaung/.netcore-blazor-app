@@ -1,0 +1,63 @@
+is_global = true
+build_property.EnableAotAnalyzer = 
+build_property.EnableSingleFileAnalyzer = 
+build_property.EnableTrimAnalyzer = false
+build_property.IncludeAllContentForSelfExtract = 
+build_property.TargetFramework = net7.0
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = 
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = false
+build_property.PlatformNeutralAssembly = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property._SupportedPlatformList = browser
+build_property.RootNamespace = app.web
+build_property.RootNamespace = app.web
+build_property.ProjectDir = D:\MinThantAungAung\DemoProjects\e-commerce\flo3\app\app.web\app.web\
+build_property.EnableComHosting = 
+build_property.EnableGeneratedComInterfaceComImportInterop = 
+build_property.RazorLangVersion = 7.0
+build_property.SupportLocalizedComponentNames = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+build_property.MSBuildProjectDirectory = D:\MinThantAungAung\DemoProjects\e-commerce\flo3\app\app.web\app.web
+build_property._RazorSourceGeneratorDebug = 
+
+[D:/MinThantAungAung/DemoProjects/e-commerce/flo3/app/app.web/app.web/App.razor]
+build_metadata.AdditionalFiles.TargetPath = QXBwLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/MinThantAungAung/DemoProjects/e-commerce/flo3/app/app.web/app.web/MainLayout.razor]
+build_metadata.AdditionalFiles.TargetPath = TWFpbkxheW91dC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/MinThantAungAung/DemoProjects/e-commerce/flo3/app/app.web/app.web/Pages/Components/PagingComponent.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ29tcG9uZW50c1xQYWdpbmdDb21wb25lbnQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/MinThantAungAung/DemoProjects/e-commerce/flo3/app/app.web/app.web/Pages/Components/PreloaderComponent.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ29tcG9uZW50c1xQcmVsb2FkZXJDb21wb25lbnQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/MinThantAungAung/DemoProjects/e-commerce/flo3/app/app.web/app.web/Pages/Components/SearchBoxComponent.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ29tcG9uZW50c1xTZWFyY2hCb3hDb21wb25lbnQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/MinThantAungAung/DemoProjects/e-commerce/flo3/app/app.web/app.web/Pages/Components/SliderComponent.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ29tcG9uZW50c1xTbGlkZXJDb21wb25lbnQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/MinThantAungAung/DemoProjects/e-commerce/flo3/app/app.web/app.web/Pages/Products/Index.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUHJvZHVjdHNcSW5kZXgucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/MinThantAungAung/DemoProjects/e-commerce/flo3/app/app.web/app.web/Pages/Products/ProductCardComponent.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUHJvZHVjdHNcUHJvZHVjdENhcmRDb21wb25lbnQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/MinThantAungAung/DemoProjects/e-commerce/flo3/app/app.web/app.web/Pages/Products/ProductDetailsComponent.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUHJvZHVjdHNcUHJvZHVjdERldGFpbHNDb21wb25lbnQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/MinThantAungAung/DemoProjects/e-commerce/flo3/app/app.web/app.web/_Imports.razor]
+build_metadata.AdditionalFiles.TargetPath = X0ltcG9ydHMucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 

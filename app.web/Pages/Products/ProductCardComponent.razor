@@ -1,0 +1,35 @@
+﻿@inherits Microsoft.AspNetCore.Components.ComponentBase
+<center>
+    <div class="card" style="width: 18rem;">
+        <img class="card-img-top shadow img-fluid" src="@ImageUrl" alt="Card image cap">
+        <div class="card-body">
+            <h5 class="card-title text-primary">@Name</h5>
+            <p class="card-text">@Description</p>
+            <p class="card-text fw-bold">@($"{Price} {Currency}")</p>
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="@ModalDataTarget">
+                Details
+            </button>
+            <a href="#" class="btn btn-outline-primary">Buy</a>
+        </div>
+    </div>
+</center>
+
+@code {
+    [Parameter]
+    public string ImageUrl { get; set; }
+
+    [Parameter]
+    public string Name { get; set; }
+
+    [Parameter]
+    public string Description { get; set; }
+
+    [Parameter]
+    public double Price { get; set; }
+
+    [Parameter]
+    public string Currency { get; set; }
+
+    [Parameter]
+    public string ModalDataTarget { get; set; }
+}

@@ -1,0 +1,64 @@
+﻿@using app.web.Dtos.Products
+<!--Modal-->
+<div class="modal modal-xl modal-lg modal-fadeIn" id="@detailProduct.modalName" tabindex="-1" aria-labelledby="productModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-fullscreen-md-down modal-fullscreen-sm-down modal-fullscreen-lg-down	">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="productModalLabel">Product Details</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-6">
+                        <img class="card-img-top shadow" src="@detailProduct.image_url" alt="Card image cap">
+                    </div>
+                    <div class="col">
+                        <h1>@detailProduct.name</h1>
+                        <figcaption class="blockquote-footer mt-2">
+                            @detailProduct.description
+                        </figcaption>
+                        @* <p>Category : @detailProduct.category</p> *@
+                        <h4>@detailProduct.price <b>@detailProduct.currency</b></h4>
+                        <h5 class="mt-4">Description</h5>
+                        <p>@detailProduct.detaildescription</p>
+                        @if (detailProduct.availability)
+                        {
+                            <span class="badge text-bg-primary">Avaiable</span>
+                        }
+                        else
+                        {
+                            <span class="badge text-bg-danger">Not Avaiable</span>
+                        }
+
+                        <h5 class="mt-5">Size</h5>
+                        <div class="btn-group-sm" role="group" aria-label="button group size">
+                            @foreach (var i in detailProduct.sizes)
+                            {
+                                <input type="radio" class="btn-check @((@i+detailProduct.id))" name="sizebtnradio" id="btnradio@((@i+detailProduct.id))" autocomplete="off">
+                                <label class="btn btn-outline-dark" for="btnradio@((@i+detailProduct.id))">@i</label>
+                            }
+                        </div>
+                        <h5 class="mt-3">Color</h5>
+                        <div class="btn-group-sm" role="group" aria-label="button group colors">
+                            @foreach (var i in detailProduct.colors)
+                            {
+                                <input type="radio" class="btn-check @((@i+detailProduct.id))" name="colorbtnradio" id="btnradio-@((@i+detailProduct.id))" autocomplete="off">
+                                <label class="btn btn-outline-dark" for="btnradio-@((@i+detailProduct.id))">@i</label>
+                            }
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Add To Cart</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@code {
+    [Parameter]
+    public ProductDto detailProduct { get; set; } = new();
+}
